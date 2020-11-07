@@ -2,7 +2,7 @@ package com.example.cs56102020falljavakepan.controllers;
 import com.example.cs56102020falljavakepan.models.Widget;
 import com.example.cs56102020falljavakepan.services.WidgetService;
 import org.springframework.web.bind.annotation.*;
-
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,11 +30,10 @@ public class WidgetController {
         return service.findWidgetsForTopic(tid);
     }
 
-    @PostMapping("/api/topics/{tid}/widgets")
+    @PostMapping("/api/widgets")
     public Widget createWidget(
-            @PathVariable("tid") String tid,
-            @RequestBody Widget widget){
-          return service.createWidget(tid,widget);
+            @RequestBody Widget widget) {
+        return service.createWidget(widget);
     }
 
     @PutMapping("/api/widgets/{wid}")

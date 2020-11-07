@@ -1,7 +1,6 @@
 package com.example.cs56102020falljavakepan.services;
 
 import com.example.cs56102020falljavakepan.models.Widget;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,18 +11,18 @@ public class WidgetService {
 
     List<Widget> widgets = new ArrayList<Widget>();
     {
-        widgets.add(new Widget("111","Widget 111", "HEADING","topic111"));
-        widgets.add(new Widget("112","Widget 112", "LIST","topic112"));
-        widgets.add(new Widget("113","Widget 113", "PARAGRAPH","topic113"));
+        widgets.add(new Widget("111","Widget 111", "HEADING","topic111","1"));
+        widgets.add(new Widget("112","Widget 112", "LIST","topic112","2"));
+        widgets.add(new Widget("113","Widget 113", "PARAGRAPH","topic113","3"));
     }
 
     public List<Widget> findAllWidgets(){
         return widgets;
     }
 
-    public Widget findWidgetById(String widgetId){
+    public Widget findWidgetById(String wid){
         for (Widget w:widgets){
-            if(w.getId().equals(widgetId))
+            if(w.getId().equals(wid))
                 return w;
         }
         return null;
@@ -40,7 +39,7 @@ public class WidgetService {
     }
 
 
-    public Widget createWidget(String tid, Widget widget){
+    public Widget createWidget(Widget widget){
         widget.setId((new Date()).toString());
         widgets.add(widget);
         return widget;

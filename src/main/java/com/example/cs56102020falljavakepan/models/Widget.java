@@ -5,7 +5,9 @@ public class Widget {
     private String name;
     private String type;
     private String topicId;
-//    private Integer widgetOrder;
+    private String widgetOrder;
+
+
 //    private String text;
 //    private String src, url, href;
 //    private Integer size;
@@ -45,11 +47,12 @@ public class Widget {
 //        this.value = value;
     }
 
-    public Widget(String  id, String name, String type, String topicId) {
+    public Widget(String  id, String name, String type, String topicId, String widgetOrder) {
         this.id = id;
         this.name = name;
         this.type = type;
         this.topicId = topicId;
+        this.widgetOrder = widgetOrder;
     }
 
     public Widget() {
@@ -87,13 +90,13 @@ public class Widget {
         this.type = type;
     }
 
-//    public Integer getWidgetOrder() {
-//        return widgetOrder;
-//    }
-//
-//    public void setWidgetOrder(Integer widgetOrder) {
-//        this.widgetOrder = widgetOrder;
-//    }
+    public String getWidgetOrder() {
+        return widgetOrder;
+    }
+
+    public void setWidgetOrder(String widgetOrder) {
+        this.widgetOrder = widgetOrder;
+    }
 //
 //    public String getText() {
 //        return text;
