@@ -10,11 +10,7 @@ import java.util.List;
 public class WidgetService {
 
     List<Widget> widgets = new ArrayList<Widget>();
-    {
-        widgets.add(new Widget("111","Widget 111", "HEADING","topic111","1"));
-        widgets.add(new Widget("112","Widget 112", "LIST","topic112","2"));
-        widgets.add(new Widget("113","Widget 113", "PARAGRAPH","topic113","3"));
-    }
+    { }
 
     public List<Widget> findAllWidgets(){
         return widgets;
