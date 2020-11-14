@@ -27,10 +27,10 @@ public class WidgetController {
           return service.findWidgetById(widgetId);
     }
 
-    @GetMapping("/api/topics/{tid}/widgets")
+    @GetMapping("/api/topics/{topicId}/widgets")
     public List<Widget> findWidgetsForTopic(
-            @PathVariable("tid") String tid){
-        return service.findWidgetsForTopic(tid);
+            @PathVariable("topicId") String topicId){
+        return service.findWidgetsForTopic(topicId);
     }
 
     @PostMapping("/api/topics/{topicId}/widgets")
