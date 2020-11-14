@@ -1,7 +1,14 @@
 package com.example.cs56102020falljavakepan.models;
 
+
+import javax.persistence.*;
+
+@Entity
+@Table(name="widgets")
 public class Widget {
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String name;
     private String type;
     private String topicId;
@@ -17,13 +24,13 @@ public class Widget {
 
 
 
-    public Widget(String id, String name, String type) {
+    public Widget(Integer id, String name, String type) {
         this.id = id;
         this.name = name;
         this.type = type;
     }
 
-    public Widget(String  id,
+    public Widget(Integer id,
                   String name,
                   String type,
                   String topicId,
@@ -67,11 +74,11 @@ public class Widget {
         this.topicId = topicId;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

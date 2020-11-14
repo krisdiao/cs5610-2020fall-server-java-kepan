@@ -1,6 +1,7 @@
 package com.example.cs56102020falljavakepan.controllers;
 import com.example.cs56102020falljavakepan.models.Widget;
 import com.example.cs56102020falljavakepan.services.WidgetService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
@@ -11,7 +12,9 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 
 public class WidgetController {
-    WidgetService service = new WidgetService();
+
+    @Autowired
+    WidgetService service ; // = new WidgetService();
 
     @GetMapping("/api/widgets")
     public List<Widget> findAllWidgets(){
@@ -20,7 +23,7 @@ public class WidgetController {
 
     @GetMapping("/api/widgets/{wid}")
     public Widget findWidgetById(
-            @PathVariable("wid") String widgetId){
+            @PathVariable("wid") Integer widgetId){
           return service.findWidgetById(widgetId);
     }
 
@@ -30,23 +33,25 @@ public class WidgetController {
         return service.findWidgetsForTopic(tid);
     }
 
-    @PostMapping("/api/widgets")
+    @PostMapping("/api/topics/{topicId}/widgets")
     public Widget createWidget(
+            @PathVariable("topicId") String tid,
             @RequestBody Widget widget) {
+        widget.setTopicId(tid);
         return service.createWidget(widget);
     }
 
     @PutMapping("/api/widgets/{wid}")
-    public int updateWidget(
-            @PathVariable("wid") String wid,
+    public Widget updateWidget(
+            @PathVariable("wid") Integer widgetId,
             @RequestBody Widget newWidget) {
-        return service.updateWidget(wid,newWidget);
+        return service.updateWidget(widgetId, newWidget);
     }
 
-    @DeleteMapping("/api/widgets/{wid}")
-    public int deleteWidget(
-            @PathVariable("wid") String wid){
-        return service.deleteWidget(wid);
+    @DeleteMapping("/api/widgets/{widgetId}")
+    public void deleteWidget(
+            @PathVariable("widgetId") Integer wid){
+        service.deleteWidget(wid);
     }
 
 }

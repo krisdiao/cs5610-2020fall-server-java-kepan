@@ -1,66 +1,51 @@
 package com.example.cs56102020falljavakepan.services;
 
 import com.example.cs56102020falljavakepan.models.Widget;
+import com.example.cs56102020falljavakepan.repositories.WidgetRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
-//@Service
+@Service
 public class WidgetService {
 
-    List<Widget> widgets = new ArrayList<Widget>();
-    { }
+    @Autowired
+    WidgetRepository widgetRepository;
 
     public List<Widget> findAllWidgets(){
-        return widgets;
+        return (List<Widget>) widgetRepository.findAll();
     }
 
-    public Widget findWidgetById(String wid){
-        for (Widget w:widgets){
-            if(w.getId().equals(wid))
-                return w;
-        }
-        return null;
+    public Widget findWidgetById(Integer widgetId){
+        return widgetRepository.findById(widgetId).get();
     }
 
     public List<Widget> findWidgetsForTopic(String tid){
-        List <Widget> ws = new ArrayList<Widget>();
-        for (Widget w: widgets){
-            if (w.getTopicId().equals(tid)){
-                ws.add(w);
-            }
-        }
-        return ws;
+        return widgetRepository.findWidgetsForTopic(tid);
     }
 
 
     public Widget createWidget(Widget widget){
-        widget.setId((new Date()).toString());
-        widgets.add(widget);
-        return widget;
+        return widgetRepository.save(widget);
     }
 
-    public int updateWidget(String wid, Widget newWidget) {
-        for(Widget w:widgets){
-            if (w.getId().equals(widgets)){
-                w.setName(newWidget.getName());
-                w.setType(newWidget.getType());
-                return 1;
-            }
+    public Widget updateWidget(Integer widgetId, Widget newWidget) {
+        Optional widgetO = widgetRepository.findById(widgetId);
+        if(widgetO.isPresent()) {
+            Widget widget = (Widget) widgetO.get();
+            widget.setName(newWidget.getName());
+            widget.setType(newWidget.getType());
+            return widgetRepository.save(widget);
+        } else {
+            return null;
         }
-        return 0;
     }
 
-    public int deleteWidget(String wid){
-        for(Widget w:widgets){
-            if (w.getId().equals(widgets)){
-                widgets.remove(w);
-                return 1;
-            }
-        }
-        return 0;
+    public void deleteWidget(Integer wid) {
+        widgetRepository.deleteById(wid);
     }
-
-
 }
